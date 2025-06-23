@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Yumurtalı Yumurta</title>
+  <style>
+    body {
+      background: #fff8e1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: sans-serif;
+      margin: 0;
+    }
+
+    h1 {
+      margin-bottom: 40px;
+      color: #bf360c;
+    }
+
+    #egg-container {
+      position: relative;
+      width: 120px;
+      height: 160px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    #egg {
+      width: 100%;
+      height: 100%;
+      background: white;
+      border-radius: 60% 60% 55% 55% / 60% 60% 40% 40%;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      border: 2px solid #ddd;
+      z-index: 2;
+    }
+
+    #crack {
+      position: absolute;
+      width: 4px;
+      height: 80px;
+      background: #888;
+      left: 58px;
+      top: 30px;
+      display: none;
+      z-index: 3;
+      clip-path: polygon(0 0, 100% 5%, 0 15%, 100% 25%, 0 35%, 100% 45%, 0 55%, 100% 65%, 0 75%, 100% 100%, 0 95%);
+    }
+
+    #yolk {
+      position: absolute;
+      top: 160px;
+      left: 35px;
+      width: 50px;
+      height: 50px;
+      background: gold;
+      border-radius: 50%;
+      display: none;
+      animation: drop 0.8s ease-out forwards;
+      z-index: 1;
+    }
+
+    @keyframes drop {
+      0% {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Yumurtalı Yumurta</h1>
+
+  <div id="egg-container">
+    <div id="egg"></div>
+    <div id="crack"></div>
+    <div id="yolk"></div>
+  </div>
+
+  <script>
+    const egg = document.getElementById("egg");
+    const crack = document.getElementById("crack");
+    const yolk = document.getElementById("yolk");
+
+    let isCracked = false;
+
+    egg.addEventListener("click", () => {
+      if (!isCracked) {
+        crack.style.display = "block";
+        setTimeout(() => {
+          yolk.style.display = "block";
+        }, 300);
+        isCracked = true;
+      }
+    });
+  </script>
+
+</body>
+</html>
