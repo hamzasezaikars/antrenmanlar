@@ -30,3 +30,40 @@ if __name__ == "__main__":
     user = input("Kullanıcı adı gir: ")
     check_username(user)
 
+import requests
+
+def check_username(username):
+    platforms = {
+        "GitHub": f"https://github.com/{username}",
+        "Twitter": f"https://twitter.com/{username}",
+        "Reddit": f"https://www.reddit.com/user/{username}",
+    }
+
+    for site, url in platforms.items():
+        try:
+            response = requests.get(url)
+            if response.status_code == 200:
+                print(f"[+] {site} profil bulundu: {url}")
+            else:
+                print(f"[-] {site} profil yok: {url}")
+        except requests.RequestException:
+            print(f"[!] {site} için bağlantı hatası")
+
+if __name__ == "__main__":
+    user = input("Kullanıcı adı gir: ")
+    check_username(user)
+
+def ip_lookup(ip):
+    response = requests.get(f"http://ip-api.com/json/{ip}")
+    data = response.json()
+    if data['status'] == 'success':
+        print(f"IP: {data['query']}")
+        print(f"Ülke: {data['country']}")
+        print(f"Şehir: {data['city']}")
+        print(f"İSS: {data['isp']}")
+        print(f"Koordinatlar: {data['lat']}, {data['lon']}")
+    else:
+        print("IP bilgisi alınamadı.")
+
+ip = input("IP adresi girin: ")
+ip_lookup(ip)
